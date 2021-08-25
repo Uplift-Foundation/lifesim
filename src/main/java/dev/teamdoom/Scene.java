@@ -27,7 +27,7 @@ public class Scene implements IScene {
 		this.id = id;
 		this.question = question;
 		this.choices = choices;
-		this.choicePoints = choicePoints;
+		this.choicePoints = choicePoints;// This isn't passed in the list of arguments above?
 		this.responses = responses;
 		this.playerCharacter = playerCharacter;
 		this.textColor = textColor;
@@ -82,7 +82,7 @@ public class Scene implements IScene {
 
 	@Override
 	public UUID getNextScene() {
-
+		///TODO - Implement getNextScene
 	}
 	
 }
