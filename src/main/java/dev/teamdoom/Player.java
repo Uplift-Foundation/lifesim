@@ -1,13 +1,16 @@
 package dev.teamdoom;
 
 public class Player implements IPlayer{
+	public static enum Gender {
+		MALE, FEMALE, NONBINARY
+	}
 	private int age;
-	public Player(int age, int gender, int reputation) {
+	public Player(int age, Gender gender, int reputation) {
 		this.age = age;
 		this.gender = gender;
 		this.reputation = reputation;
 	}
-	private int gender;
+	private Gender gender;
 	private int reputation;
 	public int getReputation() {
 		return reputation;
@@ -18,10 +21,10 @@ public class Player implements IPlayer{
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public int getGender() {
+	public Gender getGender() {
 		return gender;
 	}
-	public void setGender(int gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 	public void setReputation(int reputation) {

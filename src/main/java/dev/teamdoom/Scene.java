@@ -18,6 +18,7 @@ public class Scene implements IScene {
 		UUID id, 
 		String question, 
 		ArrayList<String> choices, 
+		ArrayList<Integer> choicePoints,
 		int userChoiceSelection,
 		ArrayList<String> responses, 
 		Player playerCharacter, 
@@ -53,7 +54,7 @@ public class Scene implements IScene {
 	//gets the selections
 	public int getUserChoiceSelection() {
 		Console c = System.console();
-		System.out.println("You can enter the choice number, from 0 to " + responses.size());
+		System.out.println("You can enter the choice number, from 0 to " + responses.size() );
 		int userChoiceSelection = Integer.parseInt(c.readLine()); //maybe later we can also enter the choice by name
 		return userChoiceSelection;
 	}
