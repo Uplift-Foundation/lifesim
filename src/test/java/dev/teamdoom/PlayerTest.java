@@ -11,7 +11,7 @@ public class PlayerTest {
 
 	@BeforeEach
 	void createDeleteDataTest() {
-		this.systemUnderTest = new Player(10, Player.Gender.MALE, 10); // create a new player here
+		this.systemUnderTest = new Player(10, Player.Gender.MALE, 10, ""); // create a new player here
 		;
 	}
 

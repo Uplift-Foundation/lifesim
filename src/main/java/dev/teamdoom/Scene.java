@@ -1,8 +1,16 @@
 package dev.teamdoom;
 
 import java.io.Console;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import com.google.gson.Gson;
 
 public class Scene implements IScene {
 	private UUID id;
@@ -36,6 +44,18 @@ public class Scene implements IScene {
 		this.nextScene = nextScene;
 	}	
     
+	public static void saveToFile(List<Scene> scenes) {
+		try {
+			Writer writer = Files.newBufferedWriter(Paths.get(Settings.SCENE_FILE), StandardCharsets.UTF_8,
+					StandardOpenOption.CREATE_NEW);
+			writer.write(new Gson().toJson(scenes));
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	@Override
 	//asks the question
 	public void printQuestion() {

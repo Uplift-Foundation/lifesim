@@ -58,7 +58,7 @@ public class SceneTest {
             new Player(
                 10, 
                 Gender.MALE, 
-                10), 
+                10, "Demo"), 
             TerminalColor.ANSI_BLACK, 
             nextScenes
         );
@@ -72,7 +72,7 @@ public class SceneTest {
             new Player(
                 10, 
                 Gender.MALE, 
-                10), 
+                10, "Demo"), 
             TerminalColor.ANSI_BLACK, 
             nextScenes
         );
