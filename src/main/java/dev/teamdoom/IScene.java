@@ -1,13 +1,13 @@
 package dev.teamdoom;
 
-import java.util.ArrayList;
 import java.util.UUID;
+import java.io.Console;
 
 public interface IScene {
 	void printQuestion();
 	void printChoices();
-	int getUserChoiceSelection();
+	int getUserChoiceSelection(Console c);
 	String getAppropriateResponse(int responseIndex);
 	void changeTextColorAndPrint(int responseIndex);
-	UUID getNextScene();
+	UUID getNextScene(int responseIndex);
 }

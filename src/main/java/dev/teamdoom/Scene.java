@@ -13,6 +13,7 @@ public class Scene implements IScene {
 	private Player playerCharacter;
 	private String textColor;
 	private ArrayList<UUID> nextScene;
+	Console c;
 	
 	public Scene(
 		UUID id, 
@@ -52,8 +53,7 @@ public class Scene implements IScene {
 	@Override
 
 	//gets the selections
-	public int getUserChoiceSelection() {
-		Console c = System.console();
+	public int getUserChoiceSelection(Console c) {
 		System.out.println("You can enter the choice number, from 0 to " + responses.size() );
 		int userChoiceSelection = Integer.parseInt(c.readLine()); //maybe later we can also enter the choice by name
 		return userChoiceSelection;
@@ -82,8 +82,9 @@ public class Scene implements IScene {
 	}
 
 	@Override
-	public UUID getNextScene() {
-		///TODO - Implement getNextScene
+	public UUID getNextScene(int responseIndex) {
+		UUID UUIDtoReturn = nextScene.get(responseIndex);
+		return UUIDtoReturn;	
 	}
 	
 }
