@@ -66,7 +66,7 @@ public class Player implements IPlayer {
 	public static void saveToFile(Player player) {
 		try {
 			Writer writer = Files.newBufferedWriter(Paths.get(Settings.SAVE_FILE), StandardCharsets.UTF_8,
-					StandardOpenOption.CREATE_NEW);
+					StandardOpenOption.CREATE);
 			writer.write(new Gson().toJson(player));
 			writer.close();
 		} catch (Exception e) {
