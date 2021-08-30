@@ -8,13 +8,28 @@ import org.junit.jupiter.api.Test;
 public class PlayerTest {
 
 	private Player systemUnderTest;
+	private Player systemUnderTest2;
+
 
 	@BeforeEach
 	void createDeleteDataTest() {
-		this.systemUnderTest = new Player(10, Player.Gender.MALE, 10, ""); // create a new player here
+		this.systemUnderTest = new Player(10, Player.Gender.MALE, 10); // create a new player here
 		;
 	}
+	@Test
+	void testSaveAndLoadFile() {
+		systemUnderTest2 = new Player(20, Player.Gender.FEMALE, 20);
+		systemUnderTest2.saveToFile();
 
+		systemUnderTest2 = null;
+
+		systemUnderTest2 = Player.loadPlayerFromGame();
+
+		assertEquals(20, systemUnderTest2.getAge());
+		assertEquals(Player.Gender.FEMALE, systemUnderTest2.getGender());
+		assertEquals(20, systemUnderTest2.getReputation());
+
+	}
 	@Test
 	void testGetGender() {
 		assertEquals(Player.Gender.MALE, this.systemUnderTest.getGender());
