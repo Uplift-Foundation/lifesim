@@ -23,7 +23,7 @@ public class PlayerTest {
 
 		systemUnderTest2 = null;
 		try {
-			systemUnderTest2 = Player.loadPlayerFromGame();
+			// systemUnderTest2 = Player.loadPlayerFromGame();
 			assertEquals(20, systemUnderTest2.getAge());
 			assertEquals(Player.Gender.FEMALE, systemUnderTest2.getGender());
 			assertEquals(20, systemUnderTest2.getReputation());

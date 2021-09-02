@@ -1,0 +1,47 @@
+[
+    {
+        "id": "10ba252b-7f10-403c-93a6-93abf87644a5",
+        "question": "A friend tells you that they're going to ditch school tomorrow to go to a party. Do you go?",
+        "choices": [
+            "Yes",
+            "No"
+        ],
+        "choicePoints": [
+            5,
+            -11
+        ],
+        "responses": [
+            "YAY! YOU'RE RESPONSIBLE!",
+            "Boo, you suck."
+        ]
+    },
+    {
+        "id": "1ee47bb6-4e3d-4274-90de-c63e114afeec",
+        "question": "You come home from 1st grade. Your mom tells you 'You need to do your math homework! Do you do it?",
+        "choices": [
+            "Yes",
+            "No"
+        ],
+        "choicePoints": [
+            5,
+            -5
+        ],
+        "responses": [
+            "YAY! YOU'RE RESPONSIBLE!",
+            "Boo, you suck."
+        ]
+    },
+    {
+        "id": "4c89395a-0a85-11ec-9a03-0242ac130003",
+        "question": "Your Older Brother asks you to pass a bag of chips right next to him, Do you pass him the chips?",
+        "choices": [
+            "Yes",
+            "No"
+        ],
+        "choicePoints": [
+            10,
+            -10
+        ],
+        "responses": []
+    }
+]

@@ -38,9 +38,9 @@ public class SceneTest {
         responses.add("AAAAA");
         responses.add("BBBBB");
         this.systemUnderTest = new Scene(UUID.randomUUID(), "Do you go to school or ditch?", choices, choicePoints, 0,
-                responses, new Player(10, Gender.MALE, 10), TerminalColor.ANSI_BLACK, nextScenes);
+                responses, new Player(10, Gender.MALE, 10), TerminalUtilities.ANSI_BLACK, nextScenes);
         this.systemUnderTest2 = new Scene(UUID.randomUUID(), "Do you go to school or ditch?", choices, choicePoints2, 1,
-                responses, new Player(10, Gender.MALE, 10), TerminalColor.ANSI_BLACK, nextScenes);
+                responses, new Player(10, Gender.MALE, 10), TerminalUtilities.ANSI_BLACK, nextScenes);
     }
 
     @Test

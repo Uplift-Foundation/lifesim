@@ -74,13 +74,13 @@ public class Scene extends DefaultScene {
 	public void changeTextColorAndPrint(int responseIndex) {
 		int points = choicePoints.get(responseIndex);
 		if (points > 0) {
-			TerminalColor.printLine(responses.get(responseIndex), TerminalColor.GREEN_BRIGHT);
+			TerminalUtilities.printLine(responses.get(responseIndex), TerminalUtilities.GREEN_BRIGHT);
 		}
 		if (points == 0) {
-			TerminalColor.printLine(responses.get(responseIndex), TerminalColor.YELLOW_BRIGHT);
+			TerminalUtilities.printLine(responses.get(responseIndex), TerminalUtilities.YELLOW_BRIGHT);
 		}
 		if (points < 0) {
-			TerminalColor.printLine(responses.get(responseIndex), TerminalColor.RED_BRIGHT);
+			TerminalUtilities.printLine(responses.get(responseIndex), TerminalUtilities.RED_BRIGHT);
 		}
 	}
 

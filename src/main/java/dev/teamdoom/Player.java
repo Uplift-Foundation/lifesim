@@ -16,6 +16,25 @@ public class Player implements IPlayer {
 		this.reputation = reputation;
 		// this.setName(name);
 	}
+
+	public Player() {
+		try {
+			Player savedPlayer = new DataHandler<Player>().deserializeObject(Settings.SAVE_FILE, Player.class);
+			this.gender = savedPlayer.gender;
+			this.reputation = savedPlayer.reputation;
+			this.age = savedPlayer.age;
+		} catch (Exception e) {
+			//assume that there is no player if this fails
+			System.out.println("What gender is your player?");
+			Player.Gender selectedGender = Player.Gender.valueOf(System.console().readLine().trim().toUpperCase());
+			System.out.println("Want name do you want your player to have?");
+
+			this.setGender(selectedGender);
+			this.setReputation(0);
+			
+			this.saveToFile();
+		}
+	}
 	/*
 	 * in the future we may need name props public String getName() { return name; }
 	 * 
@@ -52,14 +71,5 @@ public class Player implements IPlayer {
 	public void saveToFile() {
 		DataHandler.serializeObject(Settings.SAVE_FILE, this);
 	}
-
-	public static final Player loadPlayerFromGame() throws Exception {
-			try {
-			 return new DataHandler<Player>().deserializeObject(Settings.SAVE_FILE, Player.class);
-			}
-			catch (Exception e) {
-				throw e;
-	}
-}
 
 }
