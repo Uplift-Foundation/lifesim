@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import dev.teamdoom.CRUD.DataHandler;
 
-public class Scene extends DefaultScene {
+public class Scene implements IScene {
 	private UUID id;
 	private String question;
 	private ArrayList<String> choices;
@@ -29,14 +29,18 @@ public class Scene extends DefaultScene {
 		String textColor, 
 		ArrayList<UUID> nextScene
 	) {
-		super(id, question, choices, choicePoints, responses);
+		this.id = id;
+		this.question = question;
+		this.choices = choices;
+		this.choicePoints =  choicePoints;
+		this.responses = responses;
 		this.playerCharacter = playerCharacter;
 		this.textColor = textColor;
 		this.nextScene = nextScene;
 	}	
     
 	public static void saveToFile(List<Scene> scenes) {
-		DataHandler.serializeObject(Settings.SCENE_FILE, Scene.class);
+		// new DataHandler<()>.serializeObject(Settings.SCENE_FILE, Scene.class);
 	}
 
 	@Override
@@ -52,8 +56,6 @@ public class Scene extends DefaultScene {
 			System.out.println(choice);
 		}
 	}
-
-	@Override
 
 	//gets the selections
 	public int getUserChoiceSelection(Console c) {
