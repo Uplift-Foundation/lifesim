@@ -1,13 +1,6 @@
 package dev.teamdoom;
 
-import java.io.Reader;
-import java.io.Writer;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-
-import com.google.gson.Gson;
+import dev.teamdoom.CRUD.DataHandler;
 
 public class Player implements IPlayer {
 	public static enum Gender {
@@ -56,33 +49,15 @@ public class Player implements IPlayer {
 		this.reputation = reputation;
 	}
 
-	public static final Boolean saveFileExists() {
-		return Files.exists(Paths.get(Settings.SAVE_FILE));
-	}
-
 	public void saveToFile() {
-		try {
-			Writer writer = Files.newBufferedWriter(Paths.get(Settings.SAVE_FILE), StandardCharsets.UTF_8,
-					StandardOpenOption.CREATE);
-			writer.write(new Gson().toJson(this));
-			writer.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		DataHandler.serializeObject(Settings.SAVE_FILE, this);
 	}
 
 	public static final Player loadPlayerFromGame() {
-		try {
-			// checks if player savefile exists
-			Reader reader = Files.newBufferedReader(Paths.get(Settings.SAVE_FILE));
-			Player player = new Gson().fromJson(reader, Player.class);
-			return player;
-		} catch (Exception e) {
-			// later handle more exceptions, but for the moment assume we don't have a
-			// savefile
-			return new Player(10, Gender.MALE, 10);
-
+		if (DataHandler.doesFileExist(Settings.SAVE_FILE)) {
+			 return (Player) DataHandler.deserializeObject(Settings.SAVE_FILE, Player.class);
+		} else {
+			return new Player(10, Player.Gender.MALE, 10);
 		}
 	}
 

@@ -1,6 +1,6 @@
 package dev.teamdoom;
 
 public class Settings {
-	static final String SCENE_FILE = "scenes.json";
-	static final String SAVE_FILE = "savefile.json";
+	public static final String SCENE_FILE = "scenes.json";
+	public static final String SAVE_FILE = "savefile.json";
 }
