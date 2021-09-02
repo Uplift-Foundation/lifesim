@@ -2,16 +2,22 @@ package dev.teamdoom.CRUD;
 
 import java.io.Reader;
 import java.io.Writer;
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 
 import dev.teamdoom.Settings;
+import dev.teamdoom.TerminalColor;
 
-public class DataHandler {
+public class DataHandler <T> {
 	public static void serializeObject(String fileName, Object object) {
 		try {
 		Reader json = Files.newBufferedReader(Paths.get(fileName));
@@ -42,15 +48,23 @@ public class DataHandler {
 		return Files.exists(Paths.get(fileName));
 	}
 
-	public static Object deserializeObject(String fileName, Object object) {
+	public T deserializeObject(String fileName, Type type) throws Exception {
 		try {
-			Reader json = Files.newBufferedReader(Paths.get(Settings.SAVE_FILE));
-			return new Gson().fromJson(json, object.getClass());
+			Reader json = Files.newBufferedReader(Paths.get(Settings.SCENE_FILE));
+			return new Gson().fromJson(json, type);
 
-		} catch (Exception e) {
+		} catch(JsonSyntaxException e) {
 			e.printStackTrace();
-			return new Object();
+			throw e;
+		} catch(JsonIOException e) {
+			e.printStackTrace();
+			throw e;
+		} catch(JsonParseException e) {
+			e.printStackTrace();
+			throw e;
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
-
 	}
 }

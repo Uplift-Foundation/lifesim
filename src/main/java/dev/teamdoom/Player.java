@@ -53,12 +53,13 @@ public class Player implements IPlayer {
 		DataHandler.serializeObject(Settings.SAVE_FILE, this);
 	}
 
-	public static final Player loadPlayerFromGame() {
-		if (DataHandler.doesFileExist(Settings.SAVE_FILE)) {
-			 return (Player) DataHandler.deserializeObject(Settings.SAVE_FILE, Player.class);
-		} else {
-			return new Player(10, Player.Gender.MALE, 10);
-		}
+	public static final Player loadPlayerFromGame() throws Exception {
+			try {
+			 return new DataHandler<Player>().deserializeObject(Settings.SAVE_FILE, Player.class);
+			}
+			catch (Exception e) {
+				throw e;
 	}
+}
 
 }
