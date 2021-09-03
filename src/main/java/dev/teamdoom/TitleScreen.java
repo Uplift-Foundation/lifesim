@@ -53,6 +53,8 @@ public class TitleScreen implements IConsoleScreen {
 				for(DefaultScene s: scenes) {
 					s.printQuestion();
 					s.printChoices();
+					int userChoice = s.getUserChoiceSelection();
+					s.changeTextColorAndPrint(userChoice);
 				}
 				break;
 			case 3:

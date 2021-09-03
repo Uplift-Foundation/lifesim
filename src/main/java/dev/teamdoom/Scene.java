@@ -59,7 +59,7 @@ public class Scene implements IScene {
 	}
 
 	//gets the selections
-	public int getUserChoiceSelection(Console c) {
+	public int getUserChoiceSelection() {
 		System.out.println("You can enter the choice number, from 0 to " + responses.size() );
 		int userChoiceSelection = Integer.parseInt(c.readLine()); //maybe later we can also enter the choice by name
 		return userChoiceSelection;

@@ -62,38 +62,50 @@ public class DefaultScene implements IScene {
 
 	@Override
 	public void printQuestion() {
-		// TODO Auto-generated method stub
-
+		System.out.println(question);	
 	}
 
 	@Override
+	//prints the choices
 	public void printChoices() {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < choices.size() - 1; i++){
+			System.out.println(i + ") " + choices.get(i));
+		}
+	}
 
+	//gets the selections
+	public int getUserChoiceSelection() {
+		System.out.println("You can enter the choice number, from 0 to " + (responses.size() - 1));
+		int userChoiceSelection = Integer.parseInt(System.console().readLine()); //maybe later we can also enter the choice by name
+		return userChoiceSelection;
 	}
 
 	@Override
-	public int getUserChoiceSelection(Console c) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
+	//gets appropriate responses
 	public String getAppropriateResponse(int responseIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		String response = responses.get(responseIndex);
+		return response;
 	}
+	
 
 	@Override
 	public void changeTextColorAndPrint(int responseIndex) {
-		// TODO Auto-generated method stub
-
+		int points = choicePoints.get(responseIndex);
+		if (points > 0) {
+			TerminalUtilities.printLine(responses.get(responseIndex), TerminalUtilities.GREEN_BRIGHT);
+		}
+		if (points == 0) {
+			TerminalUtilities.printLine(responses.get(responseIndex), TerminalUtilities.YELLOW_BRIGHT);
+		}
+		if (points < 0) {
+			TerminalUtilities.printLine(responses.get(responseIndex), TerminalUtilities.RED_BRIGHT);
+		}
 	}
 
-	@Override
+	// @Override
 	public UUID getNextScene(int responseIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		//TO BE IMPLEMENTED
+		return null;	
 	}
 
 }
