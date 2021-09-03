@@ -52,7 +52,7 @@ public class SceneTest {
     @Test
     void testScenePrintChoices() {
         this.systemUnderTest.printChoices();
-        assertEquals("AAAAA\nBBBBB", outputStreamCaptor.toString().trim());
+        assertTrue(outputStreamCaptor.toString().indexOf("AAAAA\nBBBBB") != -1);
     }
 
     @Test

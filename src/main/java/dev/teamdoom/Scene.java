@@ -52,6 +52,7 @@ public class Scene implements IScene {
 	@Override
 	//prints the choices
 	public void printChoices() {
+		System.out.println("You can enter choices 0 through " + choices.size());
 		for(String choice : choices){
 			System.out.println(choice);
 		}

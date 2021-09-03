@@ -12,22 +12,27 @@ import com.google.gson.Gson;
 
 import dev.teamdoom.Settings;
 
-public class DataHandler <T> {
+public class DataHandler<T> {
 	public void serializeObject(String fileName, T newObject) throws Exception {
 		try {
-		Reader json = Files.newBufferedReader(Paths.get(fileName));
-		Object oldObject = new Gson().fromJson(json, newObject.getClass());
+			Reader json = Files.newBufferedReader(Paths.get(fileName));
+			Object oldObject = new Gson().fromJson(json, newObject.getClass());
 
-		if (newObject != oldObject) {
+			if (newObject != oldObject) {
 				Writer writer = Files.newBufferedWriter(Paths.get(fileName), StandardCharsets.UTF_8,
 						StandardOpenOption.CREATE);
 				writer.write(new Gson().toJson(newObject));
 				writer.close();
 			}
-	} catch(Exception e) {
-		e.printStackTrace();
-	}
-	
+		} catch (Exception e) {
+			// the file probably doesn't exist, so we'll make it.
+			Writer writer = Files.newBufferedWriter(Paths.get(fileName), StandardCharsets.UTF_8,
+					StandardOpenOption.CREATE);
+			writer.write(new Gson().toJson(newObject));
+			writer.close();
+			e.printStackTrace();
+		}
+
 	}
 
 	public static void deleteFile(String fileName) {
@@ -47,7 +52,7 @@ public class DataHandler <T> {
 		try {
 			Reader json = Files.newBufferedReader(Paths.get(Settings.SCENE_FILE));
 			return new Gson().fromJson(json, type);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw e;
 		}
 	}
