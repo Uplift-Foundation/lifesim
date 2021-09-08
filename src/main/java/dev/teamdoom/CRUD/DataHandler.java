@@ -12,7 +12,11 @@ import com.google.gson.Gson;
 
 import dev.teamdoom.Settings;
 
-public class DataHandler<T> {
+public class DataHandler<T> { // You broke your contract - needs to implement an interface
+
+	// I understand what you are going for here and it's valid
+	// For this course - separate your Create and Update into two 
+	// separate methods
 	public void serializeObject(String fileName, T newObject) throws Exception {
 		try {
 			Reader json = Files.newBufferedReader(Paths.get(fileName));
@@ -38,12 +42,13 @@ public class DataHandler<T> {
 	public static void deleteFile(String fileName) {
 		try {
 			Files.deleteIfExists(Paths.get(fileName));
-
 		} catch (Exception e) {
 
 		}
 	}
 
+	// This can probably be private and not a part of your interface 
+	// (It's exclusive to the file DataHandler - wouldn't be required by other storage mechanisms)
 	public static boolean doesFileExist(String fileName) {
 		return Files.exists(Paths.get(fileName));
 	}
