@@ -86,5 +86,7 @@ public class Scene implements IScene {
 		UUID UUIDtoReturn = nextScene.get(responseIndex);
 		return UUIDtoReturn;	
 	}
-	
+	public String toString() {
+	return id + "," + question + "," + choices + "," + choicePoints + "," + responses + "," + playerCharacter + "," + textColor + "," + nextScene + "," + c;
+	}
 }

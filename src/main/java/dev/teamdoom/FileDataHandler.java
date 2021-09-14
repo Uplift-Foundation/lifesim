@@ -1,86 +1,135 @@
 package dev.teamdoom;
 
-import java.io.Reader;
-import java.io.Writer;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-import com.google.gson.Gson;
+public class FileDataHandler implements IDataHandler {
 
-public class FileDataHandler<T> implements IDataHandler { // You broke your contract - needs to implement an interface
+	private String fileLocation;
+	private File file;
+	Scanner scanner;
 
-	// I understand what you are going for here and it's valid
-	// For this course - separate your Create and Update into two 
-	// separate methods
-	public void serializeObject(String fileName, T newObject) throws Exception {
+	public FileDataHandler(String fileLocationFromUser) {
+		this.fileLocation = fileLocationFromUser;
 		try {
-			Reader json = Files.newBufferedReader(Paths.get(fileName));
-			Object oldObject = new Gson().fromJson(json, newObject.getClass());
-
-			if (newObject != oldObject) {
-				Writer writer = Files.newBufferedWriter(Paths.get(fileName), StandardCharsets.UTF_8,
-						StandardOpenOption.CREATE);
-				writer.write(new Gson().toJson(newObject));
-				writer.close();
-			}
-		} catch (Exception e) {
-			// the file probably doesn't exist, so we'll make it.
-			Writer writer = Files.newBufferedWriter(Paths.get(fileName), StandardCharsets.UTF_8,
-					StandardOpenOption.CREATE);
-			writer.write(new Gson().toJson(newObject));
-			writer.close();
+			this.file = new File(fileLocationFromUser);
+			this.scanner = new Scanner(this.file);
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
-	public static void deleteFile(String fileName) {
+	@Override
+	public void createPlayer(String fileName, Player player) {
+		BufferedWriter bw;
 		try {
-			Files.deleteIfExists(Paths.get(fileName));
-		} catch (Exception e) {
-
+			bw = new BufferedWriter(new FileWriter(this.fileLocation, true));
+			bw.write(player.toString());
+			bw.newLine();
+			bw.flush();
+			bw.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
 
-	// This can probably be private and not a part of your interface 
-	// (It's exclusive to the file DataHandler - wouldn't be required by other storage mechanisms)
-	public static boolean doesFileExist(String fileName) {
-		return Files.exists(Paths.get(fileName));
-	}
-
-	public T deserializeObject(String fileName, Type type) throws Exception {
-		try {
-			Reader json = Files.newBufferedReader(Paths.get(Settings.SCENE_FILE));
-			return new Gson().fromJson(json, type);
-		} catch (Exception e) {
-			throw e;
+	public Scene readScene(String fileName) {
+		if (this.file != null) {
+			try {
+				this.scanner = new Scanner(this.file);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			while (this.scanner != null && this.scanner.hasNextLine()) {
+				String line = this.scanner.nextLine();
+				String[] props = line.split(",");
+				return new Scene(props[0], props[1], props[2], props[3], props[4], props[5], props[6], props[7], props[8], props[9]);
+			}
 		}
+		return new Player(18, Player.Gender.MALE, 0);
 	}
-
-	@Override
-	public void createObject(String fileName) {
-		// TODO Auto-generated method stub
+	}
 		
+
+	@Override
+	public Player readPlayer(String fileName) throws Exception {
+		if (this.file != null) {
+			try {
+				this.scanner = new Scanner(this.file);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			while (this.scanner != null && this.scanner.hasNextLine()) {
+				String line = this.scanner.nextLine();
+				String[] props = line.split(",");
+				return new Player(Integer.parseInt(props[0]), Player.Gender.valueOf(props[1]),
+						Integer.parseInt(props[2]));
+			}
+		}
+		return new Player(18, Player.Gender.MALE, 0);
 	}
 
 	@Override
-	public void updateObject(String fileName, Object newObject) {
-		// TODO Auto-generated method stub
-		
+	public void updatePlayer(String fileName, Player player) {
+
+		try {
+			this.deletePlayer("player.csv");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.createPlayer("player.csv", player);
 	}
 
 	@Override
-	public void deleteObject(String fileName) {
-		// TODO Auto-generated method stub
-		
+	public void deletePlayer(String fileName) throws Exception {
+		this.file.delete();
+
 	}
 
-	@Override
-	public Object readObject(String fileName, Object type) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// @Override
+	// public void deletePlayer(String fileName) throws Exception
+	// {
+	// // This is delete from a file
+	// //now read the file line by line...
+	// ArrayList<String> lines = new ArrayList<String>();
+	// if (this.file != null)
+	// {
+	// this.scanner = new Scanner(this.file);
+	// while (this.scanner != null && this.scanner.hasNextLine())
+	// {
+	// String line = this.scanner.nextLine();
+	// }
+	// }
+
+	// BufferedWriter bw;
+	// try
+	// {
+	// bw = new BufferedWriter(new FileWriter(this.fileLocation));
+	// lines.forEach(lineToWrite ->
+	// {
+	// try
+	// {
+	// bw.write(lineToWrite);
+	// bw.newLine();
+	// } catch (IOException e)
+	// {
+	// e.printStackTrace();
+	// }
+	// }
+	// );
+	// bw.flush();
+	// bw.close();
+	// return true;
+	// } catch (IOException e1)
+	// {
+	// e1.printStackTrace();
+	// }
+	// // We throw a custom error here if we can't find anything with that ID
+	// throw new Exception("Item not found with that ID");
+	// }
 }

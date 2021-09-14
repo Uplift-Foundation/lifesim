@@ -30,6 +30,8 @@ public class Player implements IPlayer{
 	public void setReputation(int reputation) {
 		this.reputation = reputation;
 	}
-
+	public String toString() {
+		return this.getAge() + "," + this.getGender() + "," + this.getReputation();
+	}
 
 }
