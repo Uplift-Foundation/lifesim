@@ -1,4 +1,4 @@
-package dev.teamdoom.CRUD;
+package dev.teamdoom;
 
 import java.io.Reader;
 import java.io.Writer;
@@ -10,7 +10,7 @@ import java.nio.file.StandardOpenOption;
 
 import com.google.gson.Gson;
 
-public class DataHandler<T> { // You broke your contract - needs to implement an interface
+public class FileDataHandler<T> implements IDataHandler { // You broke your contract - needs to implement an interface
 
 	// I understand what you are going for here and it's valid
 	// For this course - separate your Create and Update into two 
@@ -58,5 +58,29 @@ public class DataHandler<T> { // You broke your contract - needs to implement an
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+
+	@Override
+	public void createObject(String fileName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateObject(String fileName, Object newObject) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteObject(String fileName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object readObject(String fileName, Object type) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

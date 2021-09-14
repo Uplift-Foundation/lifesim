@@ -3,10 +3,9 @@ package dev.teamdoom;
 public interface IDataHandler<T> {
     public void createObject(String fileName);
 
-public void cupdateObject ()sSruing fileName,T newObject;
+    public void updateObject(String fileName, T newObject);
 
-    public static void deleteObject(String fileName);
+    public void deleteObject(String fileName);
 
-    public T readObject(String fileName, Type type);
-
+    public T readObject(String fileName, T type);
 }
