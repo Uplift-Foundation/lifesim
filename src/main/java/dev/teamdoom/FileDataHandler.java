@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileDataHandler implements IDataHandler {
@@ -25,7 +24,7 @@ public class FileDataHandler implements IDataHandler {
 	}
 
 	@Override
-	public void createPlayer(String fileName, Player player) {
+	public void createPlayer(Player player) {
 		BufferedWriter bw;
 		try {
 			bw = new BufferedWriter(new FileWriter(this.fileLocation, true));
@@ -38,26 +37,26 @@ public class FileDataHandler implements IDataHandler {
 		}
 	}
 
-	public Scene readScene(String fileName) {
-		if (this.file != null) {
-			try {
-				this.scanner = new Scanner(this.file);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			while (this.scanner != null && this.scanner.hasNextLine()) {
-				String line = this.scanner.nextLine();
-				String[] props = line.split(",");
-				return new Scene(props[0], props[1], props[2], props[3], props[4], props[5], props[6], props[7], props[8], props[9]);
-			}
-		}
-		return new Player(18, Player.Gender.MALE, 0);
-	}
-	}
+	// This would go in it's own FileDataHandler - like SceneFileDataHandler.java
+	// public Scene readScene(String fileName) {
+	// 	if (this.file != null) {
+	// 		try {
+	// 			this.scanner = new Scanner(this.file);
+	// 		} catch (FileNotFoundException e) {
+	// 			e.printStackTrace();
+	// 		}
+	// 		while (this.scanner != null && this.scanner.hasNextLine()) {
+	// 			String line = this.scanner.nextLine();
+	// 			String[] props = line.split(",");
+	// 			return new Scene(props[0], props[1], props[2], props[3], props[4], props[5], props[6], props[7], props[8], props[9]);
+	// 		}
+	// 	}
+	// 	return new Player(18, Player.Gender.MALE, 0);
+	// }
 		
 
 	@Override
-	public Player readPlayer(String fileName) throws Exception {
+	public Player readPlayer() throws Exception {
 		if (this.file != null) {
 			try {
 				this.scanner = new Scanner(this.file);
@@ -75,18 +74,19 @@ public class FileDataHandler implements IDataHandler {
 	}
 
 	@Override
-	public void updatePlayer(String fileName, Player player) {
+	public Player updatePlayer(Player player) {
 
 		try {
-			this.deletePlayer("player.csv");
+			this.deletePlayer();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		this.createPlayer("player.csv", player);
+		this.createPlayer(player);
+		return player;
 	}
 
 	@Override
-	public void deletePlayer(String fileName) throws Exception {
+	public void deletePlayer() throws Exception {
 		this.file.delete();
 
 	}
