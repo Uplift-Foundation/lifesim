@@ -2,6 +2,8 @@ package dev.teamdoom;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +13,7 @@ public class PlayerTest {
 
 	@BeforeEach
 	void createDeleteDataTest() {
-		this.systemUnderTest = new Player(10, Player.Gender.MALE, 10); // create a new player here
+		this.systemUnderTest = new Player(10, Player.Gender.MALE, 10, UUID.randomUUID()); // create a new player here
 		;
 	}
 

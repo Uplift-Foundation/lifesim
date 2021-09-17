@@ -3,29 +3,18 @@ package dev.teamdoom;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.Console;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dev.teamdoom.Player.Gender;
 
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 public class SceneTest {
-	private final PrintStream standardOut = System.out;
-    private Scene systemUnderTest;
+	private Scene systemUnderTest;
     private Scene systemUnderTest2;
 	private ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 	private ArrayList<UUID> nextScenes = new ArrayList<UUID>();
@@ -58,7 +47,8 @@ public class SceneTest {
             new Player(
                 10, 
                 Gender.MALE, 
-                10), 
+                10,
+                UUID.randomUUID()), 
             TerminalColor.ANSI_BLACK, 
             nextScenes
         );
@@ -72,7 +62,8 @@ public class SceneTest {
             new Player(
                 10, 
                 Gender.MALE, 
-                10), 
+                10,
+                UUID.randomUUID()), 
             TerminalColor.ANSI_BLACK, 
             nextScenes
         );

@@ -3,9 +3,10 @@ package dev.teamdoom;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.TestInstanceFactoryContext;
 
 public class FileDataHandlerTest {
     
@@ -15,7 +16,7 @@ public class FileDataHandlerTest {
     @BeforeEach
     void assignObs(){
         this.systemUnderTest = new FileDataHandler("./Objects.csv");
-        this.testPlayer = new Player(16, Player.Gender.MALE, 0);
+        this.testPlayer = new Player(16, Player.Gender.MALE, 0, UUID.randomUUID());
     }
 
     @Test 
@@ -42,13 +43,13 @@ public class FileDataHandlerTest {
         assertEquals(testPlayer.getGender(), Player.Gender.MALE);
     }
 
-    //  @Test 
-    //  void testDelete() throws Exception{
-    //      this.systemUnderTest.createPlayer(this.testPlayer);
-    //      Player playerFromFile = this.systemUnderTest.readPlayer();
-    //      assertEquals(playerFromFile.getGender(), Player.Gender.MALE);
-    //      this.systemUnderTest.deletePlayer();
-    //      Exception exception = assertThrows(Exception.class, 
-    //          this.systemUnderTest.readPlayer()); 
-    //  }
+      @Test 
+      void testDelete() throws Exception{
+        this.systemUnderTest.createPlayer(this.testPlayer);
+        Player playerFromFile = this.systemUnderTest.readPlayer();
+        assertEquals(playerFromFile.getGender(), Player.Gender.MALE);
+        this.systemUnderTest.deletePlayer(playerFromFile);
+        // Exception exception = assertThrows(Exception.class, 
+        //     this.systemUnderTest.readPlayer()); 
+      }
 }

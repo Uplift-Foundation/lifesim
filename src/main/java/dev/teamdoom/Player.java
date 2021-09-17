@@ -1,14 +1,20 @@
 package dev.teamdoom;
 
+import java.util.UUID;
+
 public class Player implements IPlayer{
 	public static enum Gender {
 		MALE, FEMALE, NONBINARY
 	}
+
+private UUID uuid;
+
 	private int age;
-	public Player(int age, Gender gender, int reputation) {
+	public Player(int age, Gender gender, int reputation, UUID uuid) {
 		this.age = age;
 		this.gender = gender;
 		this.reputation = reputation;
+		this.uuid = uuid;
 	}
 	private Gender gender;
 	private int reputation;
@@ -31,7 +37,12 @@ public class Player implements IPlayer{
 		this.reputation = reputation;
 	}
 	public String toString() {
-		return this.getAge() + "," + this.getGender() + "," + this.getReputation();
+		return this.getAge() + "," + this.getGender() + "," + this.getReputation() + "," + this.getUuid();
 	}
-
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+	public UUID getUuid() {
+		return uuid;
+	}
 }
